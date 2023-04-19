@@ -1,1 +1,28 @@
-
+// Global Variable goes here
+// Pipeline block
+pipeline {
+   // Agent block
+   agent any
+   options {
+      buildDiscarder(logRotator(numToKeepStr: '30'))
+      timestamps()
+   }
+ 
+   
+   // Stage Block
+   stages {// stage blocks
+      stage("Build docker images") {
+         steps {
+            script {
+               echo "Bulding docker images"
+               def buildArgs = """\
+-f Dockerfile \
+."""
+                docker.build(
+                   "tomcat_with_app_imave:v1",
+                   buildArgs)
+            }
+         }
+      }
+   }
+}
