@@ -21,6 +21,8 @@ pipeline {
                 docker.build(
                    "tomcat_with_app_imave:v1",
                    buildArgs)
+                   
+                echo "docker image built successfully"
             }
          }
       }
